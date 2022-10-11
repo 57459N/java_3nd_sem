@@ -6,7 +6,6 @@ public class Cake extends Food {
 
     private String icing = "";
 
-
     private static int chocolateCakesAmount = 0;
     private static int creamyCakesAmount = 0;
     private static int caramelCakesAmount = 0;
@@ -16,6 +15,7 @@ public class Cake extends Food {
 
     public Cake(String icing) throws InvalidIcingException {
         this.icing = icing;
+        this.name = "Cake";
 
         switch (icing) {
             case (Chocolate):
@@ -35,6 +35,8 @@ public class Cake extends Food {
         }
     }
 
+
+
     public int Amount(){
         return switch (icing) {
             case (Chocolate) -> chocolateCakesAmount;
@@ -44,6 +46,17 @@ public class Cake extends Food {
         };
     }
 
+    @Override
+    public String toString() {
+        return "Cake{" +
+                "icing='" + icing + '\'' +
+                ", calories=" + calories +
+                '}';
+    }
+
+    public void consume(){
+        System.out.println(icing + " " + name + " has been eaten.");
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,5 +68,10 @@ public class Cake extends Food {
     @Override
     public int hashCode() {
         return Objects.hash(icing);
+    }
+
+    @Override
+    public int calculateCalories() {
+        return calories;
     }
 }

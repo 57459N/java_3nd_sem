@@ -15,6 +15,8 @@ public class BubbleGum extends Food {
 
     public BubbleGum(String flavour) throws InvalidFlavourException {
         this.flavour = flavour;
+        this.name = "Bubblegum";
+
         switch (flavour) {
             case (Mint):
                 this.calories = 100;
@@ -43,6 +45,18 @@ public class BubbleGum extends Food {
     }
 
     @Override
+    public String toString() {
+        return "BubbleGum{" +
+                "flavour='" + flavour + '\'' +
+                ", calories=" + calories +
+                '}';
+    }
+
+    public void consume(){
+        System.out.println(flavour + " " + name + " has been eaten.");
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -53,5 +67,10 @@ public class BubbleGum extends Food {
     @Override
     public int hashCode() {
         return Objects.hash(flavour);
+    }
+
+    @Override
+    public int calculateCalories() {
+        return calories;
     }
 }

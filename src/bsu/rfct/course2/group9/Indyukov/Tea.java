@@ -16,6 +16,7 @@ public class Tea extends Food{
 
     public Tea(String color) throws InvalidColorException {
         this.color = color;
+        this.name = "Tea";
 
         switch (color) {
             case (Black):
@@ -45,6 +46,19 @@ public class Tea extends Food{
     }
 
     @Override
+    public String toString() {
+        return "Tea{" +
+                "color='" + color + '\'' +
+                ", calories=" + calories +
+                '}';
+    }
+
+    @Override
+    public void consume(){
+        System.out.println(color + " " + name + " has been eaten.");
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -55,5 +69,10 @@ public class Tea extends Food{
     @Override
     public int hashCode() {
         return Objects.hash(color);
+    }
+
+    @Override
+    public int calculateCalories() {
+        return calories;
     }
 }

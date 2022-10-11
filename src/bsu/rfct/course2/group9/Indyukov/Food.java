@@ -1,10 +1,6 @@
 package bsu.rfct.course2.group9.Indyukov;
 
-public class Food implements Nutritious{
+public abstract class Food implements Nutritious, Consumable{
     protected int calories = 0;
-
-    @Override
-    public int calculateCalories(){
-        return calories;
-    }
+    protected String name = "";
 }

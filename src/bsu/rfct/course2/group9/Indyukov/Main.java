@@ -22,11 +22,15 @@ public class Main {
             food[8] = new Cake(Cake.Creamy);
             food[9] = new BubbleGum(BubbleGum.Mint);
 
+            Arrays.sort(food, (Food x, Food y) -> {
+                return y.calculateCalories() - x.calculateCalories();
+            });
+
             int sumCalories = 0;
             for (int i = 0; i < 10; i++) {
                 int curCalories = food[i].calculateCalories();
+                food[i].consume();
                 sumCalories += curCalories;
-                System.out.println(curCalories);
             }
             if (cals){
                 System.out.printf("Sum of calories: " + sumCalories);
@@ -38,4 +42,7 @@ public class Main {
 
     }
 
+    interface Lambda{
+        boolean compare(Food x, Food y);
+    }
 }
