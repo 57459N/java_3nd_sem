@@ -1,11 +1,16 @@
 package bsu.rfct.course2.group9.Indyukov;
 
 
+import javax.imageio.ImageIO;
 import javax.lang.model.type.NullType;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.Callable;
 import java.util.function.Function;
 
@@ -15,11 +20,20 @@ import static java.lang.Math.*;
 public class Calculator {
 
     private int activeMemoryCell = 0;
+
     private int activeFormula = 1;
 
     private double memoryCells[] = new double[3];
+
     private JFrame mainFrame = new JFrame();
+
     private JLabel resultLabel = new JLabel();
+
+    private JLabel formulaImageLabel = new JLabel();
+
+    private JLabel memoryTextLabel = new JLabel("MEM:");
+
+    private JLabel formulaTextLabel = new JLabel("Formula:");
 
     Calculator() {
 
@@ -36,7 +50,7 @@ public class Calculator {
 
         JPanel memPanel = new JPanel(); // the panel is not visible in output
 
-        JLabel memText = new JLabel("MEM:");
+
         JRadioButton rbMem1 = new JRadioButton("1");
         JRadioButton rbMem2 = new JRadioButton("2");
         JRadioButton rbMem3 = new JRadioButton("3");
@@ -99,7 +113,7 @@ public class Calculator {
             }
         });
 
-        JLabel labelFormula = new JLabel("Formula:");
+
         JRadioButton rbFormula1 = new JRadioButton("1");
         JRadioButton rbFormula2 = new JRadioButton("2");
 
@@ -107,6 +121,7 @@ public class Calculator {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Calculator.this.activeFormula = 1;
+                drawFormula("https://chart.googleapis.com/chart?cht=tx&chl=(\\ln(1%2Bx)^2%2B\\cos\\pi%20z^3)^{\\sin{y}}%2B(\\e{x^{2}}%2B\\cos%20(\\e{z})%2B\\sqrt{1/y})^{1/x}");
             }
         });
 
@@ -114,6 +129,7 @@ public class Calculator {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Calculator.this.activeFormula = 2;
+                drawFormula("https://chart.googleapis.com/chart?cht=tx&chl=y.\\frac{x^2}{\\lg{z^y%2B\\cos^2{\\sqrt[3]{x}}}}");
             }
         });
 
@@ -123,9 +139,9 @@ public class Calculator {
         formulaButtonGroup.add(rbFormula1);
         formulaButtonGroup.add(rbFormula2);
 
-        JTextField textVariableX = new JTextField(10);
-        JTextField textVariableY = new JTextField(10);
-        JTextField textVariableZ = new JTextField(10);
+        JTextField textVariableX = new JTextField("0", 10);
+        JTextField textVariableY = new JTextField("0", 10);
+        JTextField textVariableZ = new JTextField("0", 10);
 
         JButton buttonCalculate = new JButton("Calculate");
 
@@ -145,22 +161,26 @@ public class Calculator {
             }
         });
 
-        memPanel.add(memText);
+
+        //Box boxFormula = Box.createHorizontalBox();
+
+        memPanel.add(memoryTextLabel);
         memPanel.add(rbMem1);
         memPanel.add(rbMem2);
         memPanel.add(rbMem3);
         memPanel.add(buttonMemoryPlus);
         memPanel.add(buttonMemoryMinus);
         memPanel.add(buttonMemoryClear);
-        memPanel.add(labelFormula);
+        memPanel.add(formulaTextLabel);
         memPanel.add(rbFormula1);
         memPanel.add(rbFormula2);
         memPanel.add(textVariableX);
         memPanel.add(textVariableY);
         memPanel.add(textVariableZ);
         memPanel.add(buttonCalculate);
-
         memPanel.add(resultLabel);
+
+        memPanel.add(formulaImageLabel);
 
 
         mainFrame.getContentPane().add(memPanel);
@@ -190,6 +210,24 @@ public class Calculator {
 
     private void updateResult(int memoryCell) {
         Calculator.this.resultLabel.setText(Double.toString(Calculator.this.memoryCells[memoryCell]));
+    }
+
+    private void drawFormula(String strUrl) {
+        URL url = null;
+        try {
+            url = new URL(strUrl);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(url);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        formulaImageLabel.setIcon(new ImageIcon(image));
     }
 
     public void setVisible(boolean state) {
