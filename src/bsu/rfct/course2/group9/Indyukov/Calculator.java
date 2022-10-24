@@ -42,7 +42,7 @@ public class Calculator {
 
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         int width = gd.getDisplayMode().getWidth() * 480 / 1920;
-        int height = gd.getDisplayMode().getHeight() * 640 / 1080;
+        int height = gd.getDisplayMode().getHeight() * 400 / 1080;
 
 
         mainFrame.setSize(width, height);
@@ -139,9 +139,9 @@ public class Calculator {
         formulaButtonGroup.add(rbFormula1);
         formulaButtonGroup.add(rbFormula2);
 
-        JTextField textVariableX = new JTextField("0", 10);
-        JTextField textVariableY = new JTextField("0", 10);
-        JTextField textVariableZ = new JTextField("0", 10);
+        JTextField textVariableX = new JTextField("0", 6);
+        JTextField textVariableY = new JTextField("0", 6);
+        JTextField textVariableZ = new JTextField("0", 6);
 
         JButton buttonCalculate = new JButton("Calculate");
 
@@ -162,29 +162,68 @@ public class Calculator {
         });
 
 
-        //Box boxFormula = Box.createHorizontalBox();
+        Box hboxFormulaChoice = Box.createHorizontalBox();
+        hboxFormulaChoice.add(Box.createHorizontalGlue());
+        hboxFormulaChoice.add(formulaTextLabel);
+        hboxFormulaChoice.add(rbFormula1);
+        hboxFormulaChoice.add(rbFormula2);
+        hboxFormulaChoice.add(Box.createHorizontalGlue());
 
-        memPanel.add(memoryTextLabel);
-        memPanel.add(rbMem1);
-        memPanel.add(rbMem2);
-        memPanel.add(rbMem3);
-        memPanel.add(buttonMemoryPlus);
-        memPanel.add(buttonMemoryMinus);
-        memPanel.add(buttonMemoryClear);
-        memPanel.add(formulaTextLabel);
-        memPanel.add(rbFormula1);
-        memPanel.add(rbFormula2);
-        memPanel.add(textVariableX);
-        memPanel.add(textVariableY);
-        memPanel.add(textVariableZ);
-        memPanel.add(buttonCalculate);
-        memPanel.add(resultLabel);
+        Box hboxFormulaImage = Box.createHorizontalBox();
+        hboxFormulaImage.add(Box.createHorizontalGlue());
+        hboxFormulaImage.add(Box.createVerticalStrut(80));
+        hboxFormulaImage.add(formulaImageLabel);
+        hboxFormulaImage.add(Box.createVerticalStrut(80));
+        hboxFormulaImage.add(Box.createHorizontalGlue());
 
-        memPanel.add(formulaImageLabel);
+        Box hboxMemory = Box.createHorizontalBox();
+        hboxMemory.add(Box.createHorizontalGlue());
+        hboxMemory.add(memoryTextLabel);
+        hboxMemory.add(rbMem1);
+        hboxMemory.add(rbMem2);
+        hboxMemory.add(rbMem3);
+        hboxMemory.add(buttonMemoryPlus);
+        hboxMemory.add(buttonMemoryMinus);
+        hboxMemory.add(buttonMemoryClear);
+        hboxMemory.add(Box.createHorizontalGlue());
+
+        Box hboxVariables = Box.createHorizontalBox();
+        hboxVariables.add(Box.createHorizontalStrut(width/5));
+        Box hboxFunc = Box.createHorizontalBox();
+
+        hboxFunc.add(new JLabel("F( "));
+        hboxFunc.add(textVariableX);
+        hboxFunc.add(new JLabel(" ; "));
+        hboxFunc.add(textVariableY);
+        hboxFunc.add(new JLabel(" ; "));
+        hboxFunc.add(textVariableZ);
+        hboxFunc.add(new JLabel(") = "));
+        hboxFunc.setMaximumSize(new Dimension(30,20));
+
+        hboxVariables.add(hboxFunc);
+        hboxVariables.add(Box.createHorizontalStrut(3));
+        hboxVariables.add(resultLabel);
+        hboxVariables.setMaximumSize(new Dimension(1000,30));
+        hboxVariables.add(Box.createHorizontalGlue());
 
 
-        mainFrame.getContentPane().add(memPanel);
+        Box hboxCalculate = Box.createHorizontalBox();
+        hboxCalculate.add(Box.createHorizontalGlue());
+        hboxCalculate.add(buttonCalculate);
+        hboxCalculate.add(Box.createHorizontalGlue());
 
+
+        Box contentBox = Box.createVerticalBox();
+        contentBox.add(hboxFormulaChoice);
+        contentBox.add(hboxFormulaImage);
+        contentBox.add(hboxMemory);
+        contentBox.add(Box.createVerticalStrut(10));
+        contentBox.add(hboxVariables);
+        contentBox.add(Box.createVerticalStrut(10));
+        contentBox.add(hboxCalculate);
+        contentBox.add(Box.createVerticalGlue());
+
+        mainFrame.getContentPane().add(contentBox);
     }
 
     private Double calculateFirstFormula(Double x, Double y, Double z) {
