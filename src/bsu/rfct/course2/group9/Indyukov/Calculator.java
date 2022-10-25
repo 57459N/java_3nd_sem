@@ -33,7 +33,13 @@ public class Calculator {
 
     private JLabel memoryTextLabel = new JLabel("MEM:");
 
+    private JLabel memoryTextLabel1 = new JLabel("0");
+    private JLabel memoryTextLabel2 = new JLabel("0");
+    private JLabel memoryTextLabel3 = new JLabel("0");
+
     private JLabel formulaTextLabel = new JLabel("Formula:");
+
+    private JButton buttonClearVariables = new JButton("Clear");
 
     Calculator() {
 
@@ -46,10 +52,6 @@ public class Calculator {
 
 
         mainFrame.setSize(width, height);
-
-
-        JPanel memPanel = new JPanel(); // the panel is not visible in output
-
 
         JRadioButton rbMem1 = new JRadioButton("1");
         JRadioButton rbMem2 = new JRadioButton("2");
@@ -89,7 +91,7 @@ public class Calculator {
             public void actionPerformed(ActionEvent e) {
                 int activeCell = Calculator.this.activeMemoryCell;
                 memoryCells[activeCell] += Double.parseDouble(resultLabel.getText());
-                updateResult(activeCell);
+                updateMemoryLabels();
             }
         });
 
@@ -99,7 +101,7 @@ public class Calculator {
             public void actionPerformed(ActionEvent e) {
                 int activeCell = Calculator.this.activeMemoryCell;
                 memoryCells[activeCell] -= Double.parseDouble(resultLabel.getText());
-                updateResult(activeCell);
+                updateMemoryLabels();
             }
         });
 
@@ -109,7 +111,8 @@ public class Calculator {
             public void actionPerformed(ActionEvent e) {
                 int activeCell = Calculator.this.activeMemoryCell;
                 memoryCells[activeCell] = 0;
-                updateResult(activeCell);
+                updateMemoryLabels();
+
             }
         });
 
@@ -161,6 +164,16 @@ public class Calculator {
             }
         });
 
+        buttonClearVariables.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textVariableX.setText("0");
+                textVariableY.setText("0");
+                textVariableZ.setText("0");
+                resultLabel.setText("0");
+            }
+        });
+
 
         Box hboxFormulaChoice = Box.createHorizontalBox();
         hboxFormulaChoice.add(Box.createHorizontalGlue());
@@ -187,6 +200,16 @@ public class Calculator {
         hboxMemory.add(buttonMemoryClear);
         hboxMemory.add(Box.createHorizontalGlue());
 
+        Box hboxMemoryLabels = Box.createHorizontalBox();
+        hboxMemoryLabels.add(Box.createHorizontalGlue());
+        hboxMemoryLabels.add(memoryTextLabel1);
+        hboxMemoryLabels.add(Box.createHorizontalStrut(20));
+        hboxMemoryLabels.add(memoryTextLabel2);
+        hboxMemoryLabels.add(Box.createHorizontalStrut(20));
+        hboxMemoryLabels.add(memoryTextLabel3);
+        hboxMemoryLabels.add(Box.createHorizontalGlue());
+        hboxMemoryLabels.setMaximumSize(new Dimension(width, 30));
+        
         Box hboxVariables = Box.createHorizontalBox();
         hboxVariables.add(Box.createHorizontalStrut(width/5));
         Box hboxFunc = Box.createHorizontalBox();
@@ -208,15 +231,16 @@ public class Calculator {
 
 
         Box hboxCalculate = Box.createHorizontalBox();
+        hboxCalculate.add(buttonClearVariables);
         hboxCalculate.add(Box.createHorizontalGlue());
         hboxCalculate.add(buttonCalculate);
-        hboxCalculate.add(Box.createHorizontalGlue());
 
 
         Box contentBox = Box.createVerticalBox();
         contentBox.add(hboxFormulaChoice);
         contentBox.add(hboxFormulaImage);
         contentBox.add(hboxMemory);
+        contentBox.add(hboxMemoryLabels);
         contentBox.add(Box.createVerticalStrut(10));
         contentBox.add(hboxVariables);
         contentBox.add(Box.createVerticalStrut(10));
@@ -247,7 +271,13 @@ public class Calculator {
         return y * x * x / divider;
     }
 
-    private void updateResult(int memoryCell) {
+    private void updateMemoryLabels() {
+        memoryTextLabel1.setText(Double.toString(memoryCells[0]));
+        memoryTextLabel2.setText(Double.toString(memoryCells[1]));
+        memoryTextLabel3.setText(Double.toString(memoryCells[2]));
+    }
+
+    private void updateResultLabel(int memoryCell) {
         Calculator.this.resultLabel.setText(Double.toString(Calculator.this.memoryCells[memoryCell]));
     }
 
