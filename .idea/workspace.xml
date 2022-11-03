@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b210cfd-0924-4f99-9ba4-ec2713a50e21" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Consumable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/HornerTableCellRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/HornerTableModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/HornersScheme.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/BubbleGum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/BubbleGum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Cake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Cake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Food.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Tea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Tea.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -35,18 +33,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/S7459N/Programming/IdeaProjects/java_3rd_sem",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.editor"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/S7459N/Programming/IdeaProjects/java_3rd_sem&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="bsu.rfct.course2.group9.Indyukov.Main" />
@@ -83,12 +81,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="food" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>
