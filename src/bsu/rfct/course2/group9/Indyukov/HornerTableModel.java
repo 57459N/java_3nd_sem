@@ -1,7 +1,6 @@
 package bsu.rfct.course2.group9.Indyukov;
 
 import javax.swing.table.AbstractTableModel;
-@SuppressWarnings("serial")
 public class HornerTableModel extends AbstractTableModel {
     private final Double[] coefficients;
     private final Double from;

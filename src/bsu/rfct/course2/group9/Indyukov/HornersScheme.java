@@ -28,7 +28,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-@SuppressWarnings("serial")
 public class HornersScheme extends JFrame {
     private static final int WIDTH = 700;
     private static final int HEIGHT = 500;
@@ -76,8 +75,8 @@ public class HornersScheme extends JFrame {
                     fileChooser = new JFileChooser();
                     fileChooser.setCurrentDirectory(new File("."));
                 }
-                if (fileChooser.showSaveDialog(HornersScheme.this) == JFileChooser.APPROVE_OPTION) ;
-                saveToGraphicsFile(fileChooser.getSelectedFile());
+                if (fileChooser.showSaveDialog(HornersScheme.this) == JFileChooser.APPROVE_OPTION)
+                    saveToGraphicsFile(fileChooser.getSelectedFile());
             }
         };
         saveToGraphicsMenuItem = fileMenu.add(saveToGraphicsAction);
@@ -175,7 +174,7 @@ public class HornersScheme extends JFrame {
                 out.writeDouble((Double) data.getValueAt(i, 1));
             }
             out.close();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -195,7 +194,7 @@ public class HornersScheme extends JFrame {
                 out.println("Значение в точке " + data.getValueAt(i, 0) + " равно " + data.getValueAt(i, 1));
             }
             out.close();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException ignored) {
         }
     }
 

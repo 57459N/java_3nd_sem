@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b210cfd-0924-4f99-9ba4-ec2713a50e21" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/HornerTableCellRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/HornerTableModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/HornersScheme.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/HornerTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/HornerTableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/HornersScheme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/HornersScheme.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +62,7 @@
       <updated>1665082322881</updated>
       <workItem from="1665082324669" duration="5423000" />
       <workItem from="1665485018362" duration="4416000" />
+      <workItem from="1667845181534" duration="396000" />
     </task>
     <servers />
   </component>
