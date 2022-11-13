@@ -20,8 +20,9 @@ public class HornersScheme extends JFrame {
     private Double[] coefficients;
     private JFileChooser fileChooser = null;
     private JMenuItem aboutMenuItem;
-    private JTextField aboutName;
-    private JTextField githubLink;
+    private JLabel aboutPhotoLabel;
+    private JTextField aboutNameTF;
+    private JTextField githubLinkTF;
     private JMenuItem saveToTextMenuItem;
     private JMenuItem saveToCSVMenuItem;
     private JMenuItem searchValueMenuItem;
@@ -53,6 +54,10 @@ public class HornersScheme extends JFrame {
                 dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 dialog.setSize(360, 360);
 
+                aboutNameTF = new JTextField("Индюков (57459N) Станислав");
+                githubLinkTF = new JTextField("https://github.com/57459N");
+
+                getImageFromGithubProfile("https://avatars.githubusercontent.com/u/57952082");
                 
 
                 dialog.setVisible(true);
@@ -169,6 +174,10 @@ public class HornersScheme extends JFrame {
         hBoxResult = Box.createHorizontalBox();
         hBoxResult.add(new JPanel());
         getContentPane().add(hBoxResult, BorderLayout.CENTER);
+    }
+
+    private void getImageFromGithubProfile(String url) {
+
     }
 
 
