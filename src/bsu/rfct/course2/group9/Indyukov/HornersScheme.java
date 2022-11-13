@@ -1,14 +1,13 @@
 package bsu.rfct.course2.group9.Indyukov;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -21,11 +20,11 @@ public class HornersScheme extends JFrame {
     private JFileChooser fileChooser = null;
     private JMenuItem aboutMenuItem;
     private JLabel aboutPhotoLabel;
-    private JTextField aboutNameTF;
-    private JTextField githubLinkTF;
+    private JLabel aboutNameTF;
+    private JButton githubLinkButton;
     private JMenuItem saveToTextMenuItem;
     private JMenuItem saveToCSVMenuItem;
-    private JMenuItem searchValueMenuItem;
+    private JMenuItem colorClosestToPrimesMenuItem;
     private JTextField textFieldFrom;
     private JTextField textFieldTo;
     private JTextField textFieldStep;
@@ -54,11 +53,39 @@ public class HornersScheme extends JFrame {
                 dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 dialog.setSize(360, 360);
 
-                aboutNameTF = new JTextField("Индюков (57459N) Станислав");
-                githubLinkTF = new JTextField("https://github.com/57459N");
+                aboutNameTF = new JLabel("Индюков (57459N) Станислав");
+                githubLinkButton = new JButton();
+                aboutPhotoLabel = new JLabel();
+                aboutPhotoLabel.setIcon(getImageFromGithubProfile("https://avatars.githubusercontent.com/u/57952082"));
 
-                getImageFromGithubProfile("https://avatars.githubusercontent.com/u/57952082");
-                
+                githubLinkButton.setText("<HTML><FONT color=\"#000099\"><U>github.com/57459N</U></FONT></HTML>");
+                githubLinkButton.setHorizontalAlignment(SwingConstants.LEFT);
+                githubLinkButton.setBorderPainted(false);
+                githubLinkButton.setOpaque(false);
+                githubLinkButton.setBackground(Color.WHITE);
+                githubLinkButton.setToolTipText("github.com/57459N");
+                githubLinkButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        if (Desktop.isDesktopSupported()) {
+                            try {
+                                Desktop.getDesktop().browse(new URI("https://github.com/57459N"));
+                            } catch (IOException e) { /* TODO: error handling */ } catch (URISyntaxException ignored) {
+                            }
+                        }
+                    }
+                });
+
+                Box box = Box.createVerticalBox();
+                box.add(aboutPhotoLabel);
+                box.add(aboutNameTF);
+                box.add(githubLinkButton);
+
+                Box hbox = Box.createHorizontalBox();
+                hbox.add(Box.createHorizontalStrut(20));
+                hbox.add(box);
+
+                dialog.getContentPane().add(hbox);
 
                 dialog.setVisible(true);
             }
@@ -91,15 +118,18 @@ public class HornersScheme extends JFrame {
         };
         saveToCSVMenuItem = fileMenu.add(saveToCSV);
         saveToCSVMenuItem.setEnabled(false);
-        Action searchValueAction = new AbstractAction("Найти значение многочлена") {
-            public void actionPerformed(ActionEvent event) {
-                String value = JOptionPane.showInputDialog(HornersScheme.this, "Введите значение для поиска", "Поиск значения", JOptionPane.QUESTION_MESSAGE);
-                renderer.setNeedle(value);
+
+        JCheckBoxMenuItem colorClosestToPrimesCB = new JCheckBoxMenuItem("Покрасить");
+        Action colorClosestToPrimesAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent event){
+                renderer.setNeedle(colorClosestToPrimesCB.isSelected());
                 getContentPane().repaint();
             }
         };
-        searchValueMenuItem = tableMenu.add(searchValueAction);
-        searchValueMenuItem.setEnabled(false);
+
+        colorClosestToPrimesCB.addActionListener(colorClosestToPrimesAction);
+        colorClosestToPrimesMenuItem = tableMenu.add(colorClosestToPrimesCB);
+        colorClosestToPrimesMenuItem.setEnabled(false);
         JLabel labelForFrom = new JLabel("X изменяется на интервале от:");
         textFieldFrom = new JTextField("0.0", 10);
         textFieldFrom.setMaximumSize(textFieldFrom.getPreferredSize());
@@ -142,7 +172,7 @@ public class HornersScheme extends JFrame {
                     getContentPane().validate();
                     saveToTextMenuItem.setEnabled(true);
                     saveToCSVMenuItem.setEnabled(true);
-                    searchValueMenuItem.setEnabled(true);
+                    colorClosestToPrimesMenuItem.setEnabled(true);
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(HornersScheme.this, "Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа", JOptionPane.WARNING_MESSAGE);
                 }
@@ -158,7 +188,7 @@ public class HornersScheme extends JFrame {
                 hBoxResult.add(new JPanel());
                 saveToTextMenuItem.setEnabled(false);
                 saveToCSVMenuItem.setEnabled(false);
-                searchValueMenuItem.setEnabled(false);
+                colorClosestToPrimesMenuItem.setEnabled(false);
                 getContentPane().validate();
             }
         });
@@ -176,10 +206,23 @@ public class HornersScheme extends JFrame {
         getContentPane().add(hBoxResult, BorderLayout.CENTER);
     }
 
-    private void getImageFromGithubProfile(String url) {
+    private ImageIcon getImageFromGithubProfile(String strUrl) {
+        URL url = null;
+        try {
+            url = new URL(strUrl);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
 
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(url);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return new ImageIcon(image);
     }
-
 
     protected void saveToTextFile(File selectedFile) {
         try {
@@ -187,7 +230,7 @@ public class HornersScheme extends JFrame {
             out.println("Результаты табулирования многочлена по схеме Горнера");
             out.print("Многочлен: ");
 
-            for (int i = coefficients.length - 1; i > 0; i--){
+            for (int i = coefficients.length - 1; i > 0; i--) {
                 out.print(coefficients[i].toString() + "*X^" + i + " ");
             }
             out.println(coefficients[0]);
@@ -199,12 +242,19 @@ public class HornersScheme extends JFrame {
                 out.println("Значение в точке " + data.getValueAt(i, 0) + " равно " + data.getValueAt(i, 1) + ". С функцией Math.pow() равно " + data.getValueAt(i, 2) + ". Разница между ними " + data.getValueAt(i, 3));
             }
             out.close();
-        } catch (FileNotFoundException ignored) {}
+        } catch (FileNotFoundException ignored) {
+        }
     }
 
     protected void saveToCSV(File selectedFile) {
         try {
             PrintStream out = new PrintStream(selectedFile);
+
+            for (int i = 0; i < 4; i++) {
+                out.print(data.getColumnName(i) + ",");
+            }
+            out.println("");
+
             for (int i = 0; i < data.getRowCount(); i++) {
                 out.println(data.getValueAt(i, 0) + "," + data.getValueAt(i, 1) + "," + data.getValueAt(i, 2) + "," + data.getValueAt(i, 3));
             }
@@ -212,6 +262,6 @@ public class HornersScheme extends JFrame {
         } catch (FileNotFoundException ignored) {
         }
     }
-  
+
 
 }

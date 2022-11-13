@@ -14,7 +14,7 @@ import javax.swing.table.TableCellRenderer;
 public class HornerTableCellRenderer implements TableCellRenderer {
     private JPanel panel = new JPanel();
     private JLabel label = new JLabel();
-    private String needle = null;
+    private boolean needle = false;
     private DecimalFormat formatter =
             (DecimalFormat) NumberFormat.getInstance();
 
@@ -36,11 +36,14 @@ public class HornerTableCellRenderer implements TableCellRenderer {
         String formattedDouble = formatter.format(value);
 
         label.setText(formattedDouble);
-        if (col == 1 && needle != null &&
-                Double.parseDouble(formattedDouble) - Math.round(Double.parseDouble(formattedDouble))
-                        <= Double.parseDouble(needle) &&
-                isPrime(Math.round(Double.parseDouble(formattedDouble)))) {
-            panel.setBackground(Color.GREEN);
+        if (col == 1 && needle ) {
+            double actual_value = Double.parseDouble(formattedDouble);
+            long closet_int_value =  Math.round(actual_value);
+            if (Math.abs(actual_value - closet_int_value) < 0.1 &&
+                    isPrime(closet_int_value)){
+                panel.setBackground(Color.GREEN);
+            }
+
         } else {
             panel.setBackground(Color.WHITE);
         }
@@ -64,7 +67,7 @@ public class HornerTableCellRenderer implements TableCellRenderer {
         return panel;
     }
 
-    public void setNeedle(String needle) {
+    public void setNeedle(boolean needle) {
         this.needle = needle;
     }
 
