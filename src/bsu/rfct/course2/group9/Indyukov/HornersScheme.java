@@ -6,11 +6,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class HornersScheme extends JFrame {
@@ -20,6 +20,8 @@ public class HornersScheme extends JFrame {
     private Double[] coefficients;
     private JFileChooser fileChooser = null;
     private JMenuItem aboutMenuItem;
+    private JTextField aboutName;
+    private JTextField githubLink;
     private JMenuItem saveToTextMenuItem;
     private JMenuItem saveToCSVMenuItem;
     private JMenuItem searchValueMenuItem;
@@ -201,6 +203,6 @@ public class HornersScheme extends JFrame {
         } catch (FileNotFoundException ignored) {
         }
     }
-
+  
 
 }
