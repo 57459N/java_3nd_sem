@@ -44,6 +44,23 @@ public class HornerTableCellRenderer implements TableCellRenderer {
         } else {
             panel.setBackground(Color.WHITE);
         }
+
+        if (value instanceof Double) {
+            double number = Double.parseDouble(formattedDouble);
+            FlowLayout alignment;
+            if (number > 0) {
+                alignment = new FlowLayout(FlowLayout.RIGHT);
+            }
+            else
+            if (number < 0){
+                alignment = new FlowLayout(FlowLayout.LEFT);
+            }
+            else{
+                alignment = new FlowLayout(FlowLayout.CENTER);
+            }
+
+            panel.setLayout(alignment);
+        }
         return panel;
     }
 
@@ -53,7 +70,7 @@ public class HornerTableCellRenderer implements TableCellRenderer {
 
     private boolean isPrime(long x) {
 
-        if (x == 0 || x == 1){
+        if (x == 0 || x == 1) {
             return false;
         }
 

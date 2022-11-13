@@ -1,7 +1,7 @@
 package bsu.rfct.course2.group9.Indyukov;
 
 import java.awt.BorderLayout;
-import java.awt.Color;  
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -68,7 +68,7 @@ public class HornersScheme extends JFrame {
         };
         saveToTextMenuItem = fileMenu.add(saveToTextAction);
         saveToTextMenuItem.setEnabled(false);
-        Action saveToGraphicsAction = new AbstractAction("Сохранить данные для построения графика") {
+        Action saveToCSV = new AbstractAction("Сохранить в CSV") {
 
             public void actionPerformed(ActionEvent event) {
                 if (fileChooser == null) {
@@ -76,10 +76,10 @@ public class HornersScheme extends JFrame {
                     fileChooser.setCurrentDirectory(new File("."));
                 }
                 if (fileChooser.showSaveDialog(HornersScheme.this) == JFileChooser.APPROVE_OPTION)
-                    saveToGraphicsFile(fileChooser.getSelectedFile());
+                    saveToCSV(fileChooser.getSelectedFile());
             }
         };
-        saveToGraphicsMenuItem = fileMenu.add(saveToGraphicsAction);
+        saveToGraphicsMenuItem = fileMenu.add(saveToCSV);
         saveToGraphicsMenuItem.setEnabled(false);
         Action searchValueAction = new AbstractAction("Найти значение многочлена") {
             public void actionPerformed(ActionEvent event) {
@@ -166,32 +166,33 @@ public class HornersScheme extends JFrame {
         getContentPane().add(hBoxResult, BorderLayout.CENTER);
     }
 
-    protected void saveToGraphicsFile(File selectedFile) {
-        try {
-            DataOutputStream out = new DataOutputStream(new FileOutputStream(selectedFile));
-            for (int i = 0; i < data.getRowCount(); i++) {
-                out.writeDouble((Double) data.getValueAt(i, 0));
-                out.writeDouble((Double) data.getValueAt(i, 1));
-            }
-            out.close();
-        } catch (Exception ignored) {
-        }
-    }
 
     protected void saveToTextFile(File selectedFile) {
         try {
             PrintStream out = new PrintStream(selectedFile);
             out.println("Результаты табулирования многочлена по схеме Горнера");
             out.print("Многочлен: ");
-            for (int i = 0; i < coefficients.length; i++) {
-                out.print(coefficients[i] + "*X^" + (coefficients.length - i - 1));
-                if (i != coefficients.length - 1) out.print(" + ");
+
+            for (int i = coefficients.length - 1; i > 0; i--){
+                out.print(coefficients[i].toString() + "*X^" + i + " ");
             }
+            out.println(coefficients[0]);
+
             out.println("");
             out.println("Интервал от " + data.getFrom() + " до " + data.getTo() + " с шагом " + data.getStep());
             out.println("====================================================");
             for (int i = 0; i < data.getRowCount(); i++) {
-                out.println("Значение в точке " + data.getValueAt(i, 0) + " равно " + data.getValueAt(i, 1));
+                out.println("Значение в точке " + data.getValueAt(i, 0) + " равно " + data.getValueAt(i, 1) + ". С функцией Math.pow() равно " + data.getValueAt(i, 2) + ". Разница между ними " + data.getValueAt(i, 3));
+            }
+            out.close();
+        } catch (FileNotFoundException ignored) {}
+    }
+
+    protected void saveToCSV(File selectedFile) {
+        try {
+            PrintStream out = new PrintStream(selectedFile);
+            for (int i = 0; i < data.getRowCount(); i++) {
+                out.println(data.getValueAt(i, 0) + "," + data.getValueAt(i, 1) + "," + data.getValueAt(i, 2) + "," + data.getValueAt(i, 3));
             }
             out.close();
         } catch (FileNotFoundException ignored) {
