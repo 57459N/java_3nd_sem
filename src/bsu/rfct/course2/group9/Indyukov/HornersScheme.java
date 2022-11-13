@@ -11,22 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class HornersScheme extends JFrame {
     private static final int WIDTH = 700;
@@ -34,8 +19,9 @@ public class HornersScheme extends JFrame {
     // Массив коэффициентов многочлена
     private Double[] coefficients;
     private JFileChooser fileChooser = null;
+    private JMenuItem aboutMenuItem;
     private JMenuItem saveToTextMenuItem;
-    private JMenuItem saveToGraphicsMenuItem;
+    private JMenuItem saveToCSVMenuItem;
     private JMenuItem searchValueMenuItem;
     private JTextField textFieldFrom;
     private JTextField textFieldTo;
@@ -52,10 +38,27 @@ public class HornersScheme extends JFrame {
         setLocation((kit.getScreenSize().width - WIDTH) / 2, (kit.getScreenSize().height - HEIGHT) / 2);
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
+        JMenu aboutMenu = new JMenu("Сравка");
+        menuBar.add(aboutMenu);
         JMenu fileMenu = new JMenu("Файл");
         menuBar.add(fileMenu);
         JMenu tableMenu = new JMenu("Таблица");
         menuBar.add(tableMenu);
+
+        Action aboutAction = new AbstractAction("Автор") {
+            public void actionPerformed(ActionEvent event) {
+                JDialog dialog = new JDialog(HornersScheme.this, "Автор", true);
+                dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                dialog.setSize(360, 360);
+
+                
+
+                dialog.setVisible(true);
+            }
+        };
+
+        aboutMenuItem = aboutMenu.add(aboutAction);
+
         Action saveToTextAction = new AbstractAction("Сохранить в текстовый файл") {
             public void actionPerformed(ActionEvent event) {
                 if (fileChooser == null) {
@@ -79,8 +82,8 @@ public class HornersScheme extends JFrame {
                     saveToCSV(fileChooser.getSelectedFile());
             }
         };
-        saveToGraphicsMenuItem = fileMenu.add(saveToCSV);
-        saveToGraphicsMenuItem.setEnabled(false);
+        saveToCSVMenuItem = fileMenu.add(saveToCSV);
+        saveToCSVMenuItem.setEnabled(false);
         Action searchValueAction = new AbstractAction("Найти значение многочлена") {
             public void actionPerformed(ActionEvent event) {
                 String value = JOptionPane.showInputDialog(HornersScheme.this, "Введите значение для поиска", "Поиск значения", JOptionPane.QUESTION_MESSAGE);
@@ -131,7 +134,7 @@ public class HornersScheme extends JFrame {
                     hBoxResult.add(new JScrollPane(table));
                     getContentPane().validate();
                     saveToTextMenuItem.setEnabled(true);
-                    saveToGraphicsMenuItem.setEnabled(true);
+                    saveToCSVMenuItem.setEnabled(true);
                     searchValueMenuItem.setEnabled(true);
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(HornersScheme.this, "Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа", JOptionPane.WARNING_MESSAGE);
@@ -147,7 +150,7 @@ public class HornersScheme extends JFrame {
                 hBoxResult.removeAll();
                 hBoxResult.add(new JPanel());
                 saveToTextMenuItem.setEnabled(false);
-                saveToGraphicsMenuItem.setEnabled(false);
+                saveToCSVMenuItem.setEnabled(false);
                 searchValueMenuItem.setEnabled(false);
                 getContentPane().validate();
             }
