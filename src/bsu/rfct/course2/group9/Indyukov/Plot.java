@@ -21,7 +21,6 @@ public class Plot extends JFrame {
     private JFileChooser fileChooser = null;
     private final JCheckBoxMenuItem showAxisMenuItem;
     private final JCheckBoxMenuItem showMarkersMenuItem;
-    private final JCheckBoxMenuItem showAreaMenuItem;
     private final JCheckBoxMenuItem RotateMenuItem;
     private final GraphicsDisplay display = new GraphicsDisplay();
     private boolean fileLoaded = false;
@@ -46,8 +45,8 @@ public class Plot extends JFrame {
                     fileChooser.setCurrentDirectory(new File("."));
                 }
                 if (fileChooser.showOpenDialog(Plot.this) ==
-                        JFileChooser.APPROVE_OPTION)
-                    openGraphics(fileChooser.getSelectedFile());
+                        JFileChooser.APPROVE_OPTION) ;
+                openGraphics(fileChooser.getSelectedFile());
             }
         };
         fileMenu.add(openGraphicsAction);
@@ -86,15 +85,6 @@ public class Plot extends JFrame {
         graphicsMenu.add(showAxisMenuItem);
         showAxisMenuItem.setSelected(true);
 
-        Action showAreaAction = new AbstractAction("Show area") {
-            public void actionPerformed(ActionEvent event) {
-                display.setShowArea(showAreaMenuItem.isSelected());
-            }
-        };
-        showAreaMenuItem = new JCheckBoxMenuItem(showAreaAction);
-        graphicsMenu.add(showAreaMenuItem);
-        showAreaMenuItem.setSelected(false);
-        showAreaMenuItem.setEnabled(false);
 
         Action RotateAction = new AbstractAction("Rotate at left") {
             public void actionPerformed(ActionEvent event) {
@@ -142,7 +132,6 @@ public class Plot extends JFrame {
                     "Cannot upload data",
                     JOptionPane.WARNING_MESSAGE);
             RestAction.setEnabled(false);
-            showAreaMenuItem.setEnabled(false);
             RotateMenuItem.setEnabled(false);
             SaveAction.setEnabled(false);
             return;
@@ -151,12 +140,10 @@ public class Plot extends JFrame {
                     "Cannot upload data",
                     JOptionPane.WARNING_MESSAGE);
             RestAction.setEnabled(false);
-            showAreaMenuItem.setEnabled(false);
             RotateMenuItem.setEnabled(false);
             SaveAction.setEnabled(false);
             return;
         }
-        showAreaMenuItem.setEnabled(true);
         RotateMenuItem.setEnabled(true);
         RestAction.setEnabled(true);
         SaveAction.setEnabled(true);
