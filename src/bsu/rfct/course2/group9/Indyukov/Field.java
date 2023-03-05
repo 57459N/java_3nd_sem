@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+
 @SuppressWarnings("serial")
 public class Field extends JPanel {
     // Флаг приостановленности движения
     private boolean paused;
     // Динамический список скачущих мячей
-    private ArrayList<BouncingBall> balls = new ArrayList<BouncingBall>(10);
+    private ArrayList<BouncingBall> balls = new ArrayList<BouncingBall>(8);
+
+
     // Класс таймер отвечает за регулярную генерацию событий ActionEvent
     // При создании его экземпляра используется анонимный класс,
     // реализующий интерфейс ActionListener
@@ -49,8 +52,15 @@ public class Field extends JPanel {
         //Заключается в добавлении в список нового экземпляра BouncingBall
         // Всю инициализацию положения, скорости, размера, цвета
         // BouncingBall выполняет сам в конструкторе
-        balls.add(new BouncingBall(this));
+        if (balls.size() < 8) {
+            balls.add(new BouncingBall(this));
+        }
     }
+
+    public ArrayList<BouncingBall> getBallsCoords() {
+        return balls;
+    }
+
 
     // Метод синхронизированный, т.е. только один поток может
     // одновременно быть внутри

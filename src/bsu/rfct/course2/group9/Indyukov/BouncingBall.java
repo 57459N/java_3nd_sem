@@ -3,6 +3,7 @@ package bsu.rfct.course2.group9.Indyukov;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
 
 public class BouncingBall implements Runnable {
     // Максимальный радиус, который может иметь мяч
@@ -50,11 +51,39 @@ public class BouncingBall implements Runnable {
         // Начальное положение мяча случайно
         x = Math.random() * (field.getSize().getWidth() - 2 * radius) + radius;
         y = Math.random() * (field.getSize().getHeight() - 2 * radius) + radius;
-        // Создаѐм новый экземпляр потока, передавая аргументом
+        // Создаём новый экземпляр потока, передавая аргументом
         // ссылку на класс, реализующий Runnable (т.е. на себя)
         Thread thisThread = new Thread(this);
         // Запускаем поток
         thisThread.start();
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public double getSpeedX() {
+        return speedX;
+    }
+
+    public double getSpeedY() {
+        return speedY;
+    }
+
+    public void setSpeedX(double speedX) {
+        this.speedX = speedX;
+    }
+
+    public void setSpeedY(double speedY) {
+        this.speedY = speedY;
     }
 
     // Метод run() исполняется внутри потока. Когда он завершает работу,
@@ -64,11 +93,62 @@ public class BouncingBall implements Runnable {
             // Крутим бесконечный цикл, т.е. пока нас не прервут,
             // мы не намерены завершаться
             while (true) {
+
                 // Синхронизация потоков на самом объекте поля
                 // Если движение разрешено - управление будет
                 // возвращено в метод
-                // В противном случае - активный поток заснѐт
+                // В противном случае - активный поток заснет
                 field.canMove(this);
+
+                ArrayList<BouncingBall> balls = field.getBallsCoords();
+
+
+                for (BouncingBall ball : balls) {
+                    if (ball.equals(this)) {
+                        continue;
+                    }
+                    BouncingBall ball1 = this;
+                    BouncingBall ball2 = ball;
+
+                    // Компоненты вектора C (вектор, соединяющий центры шаров).
+
+                    double cx = ball2.getX() - ball1.getX();
+                    double cy = ball2.getY() - ball1.getY();
+
+                    // Вектор C (вектор, соединяющий центры шаров).
+
+                    double cSqr = cx * cx + cy * cy;
+
+                    if (cSqr <= (Math.pow(ball1.getRadius() + ball2.getRadius(), 2))) {
+                        // Скалярное произведение векторов.
+                        double ball1CScalar = ball1.getSpeedX() * cx + ball1.getSpeedY() * cy;
+
+                        double ball2CScalar = ball2.getSpeedX() * cx + ball2.getSpeedY() * cy;
+
+                        // Разложение скорости шара № 1 на нормальную и тагенсальную.
+
+                        double ball1Nvx = (cx * ball1CScalar) / cSqr;
+                        double ball1Nvy = (cy * ball1CScalar) / cSqr;
+                        double ball1Tvx = ball1.getSpeedX() - ball1Nvx;
+                        double ball1Tvy = ball1.getSpeedY() - ball1Nvy;
+
+                        // Разложение скорости шара № 2 на нормальную и тагенсальную.
+
+                        double ball2Nvx = (cx * ball2CScalar) / cSqr;
+                        double ball2Nvy = (cy * ball2CScalar) / cSqr;
+                        double ball2Tvx = ball2.getSpeedX() - ball2Nvx;
+                        double ball2Tvy = ball2.getSpeedY() - ball2Nvy;
+
+                        // Реализация обмена нормальными скоростями (тагенсальные остаются неизменными).
+
+                        ball1.setSpeedX(ball2Nvx + ball1Tvx);
+                        ball1.setSpeedY(ball2Nvy + ball1Tvy);
+                        ball2.setSpeedX(ball1Nvx + ball2Tvx);
+                        ball2.setSpeedY(ball1Nvy + ball2Tvy);
+                    }
+
+                }
+
                 if (x + speedX <= radius) {
                     // Достигли левой стенки, отскакиваем право
                     speedX = -speedX;
