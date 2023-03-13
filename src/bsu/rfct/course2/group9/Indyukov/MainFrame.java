@@ -8,17 +8,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.*;
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -158,6 +148,8 @@ public class MainFrame extends JFrame {
 
     private void sendMessage() {
         try {
+            JMenu asd = new JMenu("asd");
+            
 // Получаем необходимые параметры
             final String senderName = textFieldFrom.getText();
             final String destinationAddress = textFieldTo.getText();
@@ -210,3 +202,4 @@ public class MainFrame extends JFrame {
         });
     }
 }
+
