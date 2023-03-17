@@ -3,11 +3,14 @@ package bsu.rfct.course2.group9.indyukov.java_3rd_sem;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "loginServlet", value = "/login")
 public class LoginServlet extends ChatServlet {
     private static final long serialVersionUID = 1L;
     // Длительность сессии, в секундах

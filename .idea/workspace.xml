@@ -10,34 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bbf472a-15dc-4ced-b7ab-54aa59ca147b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/java_3rd_sem_war.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/java_3rd_sem_war_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/ChatMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/ChatServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/ChatUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/LoginServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/LogoutServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/MessageListServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/NewMessageServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/compose_message.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/BubbleGum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Cake.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Consumable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Food.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/InvalidColorException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/InvalidFlavourException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/InvalidIcingException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Nutritious.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bsu/rfct/course2/group9/Indyukov/Tea.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/ChatServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/ChatServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/LogoutServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/LogoutServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/MessageListServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/MessageListServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/NewMessageServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bsu/rfct/course2/group9/indyukov/java_3rd_sem/NewMessageServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +144,7 @@
       <option name="presentableId" value="Default" />
       <updated>1678989031804</updated>
       <workItem from="1678989033014" duration="3930000" />
-      <workItem from="1679057712097" duration="1133000" />
+      <workItem from="1679057712097" duration="1749000" />
     </task>
     <servers />
   </component>

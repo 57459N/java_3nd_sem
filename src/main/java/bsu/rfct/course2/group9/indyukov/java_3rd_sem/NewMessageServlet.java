@@ -2,9 +2,9 @@ package bsu.rfct.course2.group9.indyukov.java_3rd_sem;
 
 import java.io.IOException;
 import java.util.Calendar;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class NewMessageServlet extends ChatServlet {
     private static final long serialVersionUID = 1L;

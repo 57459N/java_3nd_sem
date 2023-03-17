@@ -4,8 +4,8 @@ import jakarta.servlet.annotation.WebServlet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
 
 public class ChatServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
