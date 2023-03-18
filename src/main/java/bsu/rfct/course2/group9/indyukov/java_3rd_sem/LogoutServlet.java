@@ -1,11 +1,14 @@
 package bsu.rfct.course2.group9.indyukov.java_3rd_sem;
 
 import java.io.IOException;
+
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@WebServlet(name = "logoutServlet", value = "/chat/logout")
 public class LogoutServlet extends ChatServlet {
     private static final long serialVersionUID = 1L;
 
@@ -33,15 +36,15 @@ public class LogoutServlet extends ChatServlet {
 // Сбросить ID сессии в cookie
                 response.addCookie(new Cookie("sessionId", null));
 // Перенаправить на главную страницу
-                response.sendRedirect(response.encodeRedirectURL("/chat/"));
+                response.sendRedirect(response.encodeRedirectURL("messages"));
             } else {
 // Пользователь пытается аннулировать чужую сессию –
 // не делать ничего
-                response.sendRedirect(response.encodeRedirectURL("/chat/view.htm"));
+                response.sendRedirect(response.encodeRedirectURL("login"));
             }
         } else {
 // Перенаправить пользователя на главное окно чата
-            response.sendRedirect(response.encodeRedirectURL("/chat/view.htm"));
+            response.sendRedirect(response.encodeRedirectURL("login"));
         }
     }
 }

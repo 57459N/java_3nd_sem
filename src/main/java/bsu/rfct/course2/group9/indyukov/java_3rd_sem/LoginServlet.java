@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "loginServlet", value = "/login")
 public class LoginServlet extends ChatServlet {
@@ -73,14 +74,14 @@ public class LoginServlet extends ChatServlet {
         response.setCharacterEncoding("utf8");
 // Получить поток вывода для HTTP-ответа
         PrintWriter pw = response.getWriter();
-        pw.println("<html><head><title>Мега-чат!</title><meta httpequiv='Content-Type' content='text/html; charset=utf-8'/></head>");
+        pw.println("<html><head><title>Мега-чат!</title><meta httpequiv='Content-Type' content='text/html; charset=utf-16'/></head>");
 // Если возникла ошибка - сообщить о ней
         if (errorMessage != null) {
             pw.println("<p><font color='red'>" + errorMessage +
                     "</font></p>");
         }
 // Вывести форму
-        pw.println("<form action='/chat/' method='post'>Введите имя: <input type='text' name='name' value=''><input type='submit' value='Войти в чат'>");
+        pw.println("<form action='login' method='post'>Введите имя: <input type='text' name='name' value=''><input type='submit' value='Войти в чат'>");
         pw.println("</form></body></html>");
 // Сбросить сообщение об ошибке в сессии
         request.getSession().setAttribute("error", null);
@@ -111,7 +112,7 @@ public class LoginServlet extends ChatServlet {
 // Сохранить в сессии сообщение об ошибке
             request.getSession().setAttribute("error", errorMessage);
 // Переадресовать обратно на исходную страницу с формой
-            response.sendRedirect(response.encodeRedirectURL("/chat/"));
+            response.sendRedirect(response.encodeRedirectURL("messages"));
         }
     }
 
@@ -119,12 +120,14 @@ public class LoginServlet extends ChatServlet {
     String processLogonAttempt(String name, HttpServletRequest request,
                                HttpServletResponse response) throws IOException {
 // Определить идентификатор Java-сессии пользователя
-        String sessionId = request.getSession().getId();
+        HttpSession session = request.getSession();
+        String sessionId = session.getId();
 // Извлечь из списка объект, связанный с этим именем
         ChatUser aUser = activeUsers.get(name);
         if (aUser == null) {
 // Если оно свободно, то добавить
 // нового пользователя в список активных
+            session.setAttribute("username", name);
             aUser = new ChatUser(name,
                     Calendar.getInstance().getTimeInMillis(), sessionId);
 // Так как одновременно выполняются запросы
@@ -151,7 +154,7 @@ public class LoginServlet extends ChatServlet {
 // Добавить cookie в HTTP-ответ
             response.addCookie(sessionIdCookie);
 // Перейти к главному окну чата
-            response.sendRedirect(response.encodeRedirectURL("/chat/view.htm"));
+            response.sendRedirect(response.encodeRedirectURL("chat/messages"));
 // Вернуть null, т.е. сообщений об ошибках нет
             return null;
         } else {
